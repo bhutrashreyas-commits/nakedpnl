@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-surface-0 text-gray-100 antialiased;
+    background: radial-gradient(ellipse at top center, #131318 0%, #09090b 100%);
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+  
+  .row-gold {
+    background: linear-gradient(90deg, rgba(250, 204, 21, 0.06) 0%, transparent 40%);
+  }
+  
+  .row-silver {
+    background: linear-gradient(90deg, rgba(148, 163, 184, 0.04) 0%, transparent 40%);
+  }
+  
+  .row-bronze {
+    background: linear-gradient(90deg, rgba(217, 119, 6, 0.04) 0%, transparent 40%);
+  }
+  
+  .gold-stripe {
+    box-shadow: inset 3px 0 0 #facc15;
+  }
+  
+  .silver-stripe {
+    box-shadow: inset 3px 0 0 #94a3b8;
+  }
+  
+  .bronze-stripe {
+    box-shadow: inset 3px 0 0 #d97706;
+  }
+  
+  .verified-state {
+    background: rgba(52, 211, 153, 0.12);
+    border: 1px solid rgba(52, 211, 153, 0.25);
+  }
+  
+  .cta-hyper {
+    background: linear-gradient(135deg, #a855f7 0%, #d946ef 50%, #a855f7 100%);
+    box-shadow: 0 4px 25px -5px rgba(168, 85, 247, 0.6), inset 0 1px 0 rgba(255,255,255,0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .cta-hyper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .cta-hyper:hover::before {
+    opacity: 1;
+  }
+  
+  .cta-hyper:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 30px -5px rgba(168, 85, 247, 0.7), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  
+  .cta-hyper:active {
+    transform: translateY(0);
+  }
+  
+  .tab-active {
+    background: transparent;
+    border: 1px solid rgba(168, 85, 247, 0.5);
+    box-shadow: 0 0 8px rgba(168, 85, 247, 0.3);
+    color: #a855f7;
+  }
+  
+  .track-btn:hover .track-tip {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a2a3a;
+  border-radius: 3px;
+}

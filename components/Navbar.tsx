@@ -5,7 +5,7 @@ import { useSession, signIn, signOut } from 'next-auth/react';
 
 export function Navbar() {
   const { data: session, status } = useSession();
-  
+
   return (
     <header className="sticky top-0 z-50 bg-surface-0/90 backdrop-blur-md border-b border-border">
       <div className="max-w-6xl mx-auto px-4 h-11 flex items-center justify-between">
@@ -15,13 +15,13 @@ export function Navbar() {
           </div>
           <span className="font-semibold text-sm">NakedPnL</span>
         </Link>
-        
+
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5 text-[11px] text-gray-500">
             <span className="w-1.5 h-1.5 rounded-full bg-profit animate-pulse-live"></span>
             Live
           </div>
-          
+
           {status === 'loading' ? (
             <div className="h-7 px-3 text-[11px] font-medium bg-surface-3 border border-border rounded-md">
               Loading...
@@ -36,6 +36,7 @@ export function Navbar() {
                   Admin
                 </Link>
               )}
+
               {session.user.username && (
                 <Link
                   href={`/trader/${session.user.username}`}
@@ -44,8 +45,13 @@ export function Navbar() {
                   Profile
                 </Link>
               )}
+
               <button
-                onClick={() => signOut()}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  signOut();
+                }}
                 className="h-7 px-3 text-[11px] font-medium text-gray-400 hover:text-gray-200 transition-colors"
               >
                 Sign Out
@@ -53,7 +59,11 @@ export function Navbar() {
             </div>
           ) : (
             <button
-              onClick={() => signIn('email')}
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                signIn('email');
+              }}
               className="h-7 px-3 text-[11px] font-medium bg-surface-3 hover:bg-surface-4 border border-border rounded-md transition-all hover:border-border-light"
             >
               Connect

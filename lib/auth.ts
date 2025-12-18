@@ -19,7 +19,6 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: '/',
     verifyRequest: '/verify-request',
     error: '/auth/error',
   },
@@ -30,16 +29,15 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (session.user && token.sub) {
         session.user.id = token.sub;
-        
-        // Check if user is admin
-        const adminEmails = process.env.ADMIN_EMAILS?.split(',').map(e => e.trim()) || [];
+
+        const adminEmails =
+          process.env.ADMIN_EMAILS?.split(',').map((e) => e.trim()) || [];
         session.user.isAdmin = adminEmails.includes(session.user.email || '');
-        
-        // Get user profile
+
         const profile = await prisma.profile.findUnique({
           where: { userId: token.sub },
         });
-        
+
         if (profile) {
           session.user.username = profile.username;
           session.user.displayName = profile.displayName;
@@ -50,7 +48,6 @@ export const authOptions: NextAuthOptions = {
   },
 };
 
-// Type augmentation for NextAuth
 declare module 'next-auth' {
   interface Session {
     user: {
